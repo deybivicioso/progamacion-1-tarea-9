@@ -5,26 +5,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 
 public class componentes extends JPanel implements ActionListener {
     JPanel lamina1 = new JPanel();
     JTextField busqueda = new JTextField();
     JButton btnSelecionar = new JButton();
-    JPanel lamina2=new JPanel();
-    JTextArea vista=new JTextArea();
-    JScrollPane vistaScroll=new JScrollPane();
-    
+    JPanel lamina2 = new JPanel();
+    JTextArea vista = new JTextArea();
+    JScrollPane vistaScroll = new JScrollPane();
+
     public componentes() {
         setLayout(null);
         laminaA();
         laminaB();
         cuadroTexto();
-        boton(); 
-        areavista();       
+        boton();
+        areavista();
     }
 
     public void cuadroTexto() {
@@ -40,13 +43,12 @@ public class componentes extends JPanel implements ActionListener {
         btnSelecionar.addActionListener(this);
     }
 
-    public void areavista(){
+    public void areavista() {
         vista.setBounds(0, 0, 570, 345);
         vista.setLineWrap(true);
         vista.setWrapStyleWord(true);
-        //vistaScroll=new JScrollPane(vista);
+        // vistaScroll=new JScrollPane(vista);
         vistaScroll.setBounds(0, 0, 570, 345);
-        
 
     }
 
@@ -58,12 +60,13 @@ public class componentes extends JPanel implements ActionListener {
         lamina1.add(busqueda);
         lamina1.add(btnSelecionar);
     }
-    public void laminaB(){
+
+    public void laminaB() {
         lamina2.setLayout(null);
         lamina2.setBounds(5, 65, 570, 345);
         lamina2.setBorder(BorderFactory.createEtchedBorder());
         add(lamina2);
-        lamina2.add(vistaScroll=new JScrollPane(vista));
+        lamina2.add(vistaScroll = new JScrollPane(vista));
 
     }
 
@@ -72,10 +75,12 @@ public class componentes extends JPanel implements ActionListener {
         // TODO Auto-generated method stub
         JFileChooser fc=new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+        fc.setFileFilter(filtro);
         int seleccion=fc.showOpenDialog(lamina2);
-        if (seleccion==JFileChooser.APPROVE_OPTION){
+        if(seleccion==JFileChooser.APPROVE_OPTION){
             File fichero=fc.getSelectedFile();
-            busqueda.setText(fichero.getAbsolutePath());
+            vista.setText(fichero.getAbsolutePath());         
             try(FileReader fr=new FileReader(fichero)){
                 String cadena="";
                 int valor=fr.read();
@@ -84,12 +89,11 @@ public class componentes extends JPanel implements ActionListener {
                     valor=fr.read();
                 }
                 vista.setText(cadena);
-            }catch(IOException e1){
+            } catch (IOException e1) {
                 e1.printStackTrace();
-                System.out.println("error de tipo"+e1);
             }
-            
         }
-        
+
     }
-}
+}//este codigo aun puede mejorar integrando la posibilidad de poder visualizar imagenes.
+//el trabajo continuara durante vacaciones de navidad. 
