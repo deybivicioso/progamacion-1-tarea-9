@@ -5,7 +5,7 @@ public class gestorArchivo extends JFrame {
     public gestorArchivo(){
         setTitle("gestor de archivos");
         setVisible(true);
-        setSize(650, 460);
+        setSize(650, 660);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(nuevo);
