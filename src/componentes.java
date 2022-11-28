@@ -13,7 +13,15 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
-public class componentes extends JPanel implements ActionListener {
+public class componentes extends JPanel implements ActionListener { /*
+                                                                     * la clase "componentes" es la clase donde esta el
+                                                                     * codigo
+                                                                     * con el cual construimos los elementos visuales
+                                                                     * que se vera en nuestra clase "gestorArchivo". si
+                                                                     * "gestorArchivo" es como un caderno,
+                                                                     * la clase "componenetes" es la hoja del cuaderno y
+                                                                     * la letras que alberga el cuaderno
+                                                                     */
     JPanel lamina1 = new JPanel();
     JTextField busqueda = new JTextField();
     JButton btnSelecionar = new JButton();
@@ -73,20 +81,20 @@ public class componentes extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        JFileChooser fc=new JFileChooser();
+        JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
         fc.setFileFilter(filtro);
-        int seleccion=fc.showOpenDialog(lamina2);
-        if(seleccion==JFileChooser.APPROVE_OPTION){
-            File fichero=fc.getSelectedFile();
-            vista.setText(fichero.getAbsolutePath());         
-            try(FileReader fr=new FileReader(fichero)){
-                String cadena="";
-                int valor=fr.read();
-                while(valor!=-1){
-                    cadena=cadena+(char)valor;
-                    valor=fr.read();
+        int seleccion = fc.showOpenDialog(lamina2);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File fichero = fc.getSelectedFile();
+            vista.setText(fichero.getAbsolutePath());
+            try (FileReader fr = new FileReader(fichero)) {
+                String cadena = "";
+                int valor = fr.read();
+                while (valor != -1) {
+                    cadena = cadena + (char) valor;
+                    valor = fr.read();
                 }
                 vista.setText(cadena);
             } catch (IOException e1) {
@@ -95,5 +103,7 @@ public class componentes extends JPanel implements ActionListener {
         }
 
     }
-}//este codigo aun puede mejorar integrando la posibilidad de poder visualizar imagenes.
-//el trabajo continuara durante vacaciones de navidad. 
+}
+// este codigo aun puede mejorar integrando la posibilidad de poder visualizar
+ // imagenes.
+ // el trabajo continuara durante vacaciones de navidad.
